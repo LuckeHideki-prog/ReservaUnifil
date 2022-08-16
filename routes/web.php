@@ -1,7 +1,9 @@
 <?php
-
+  
 use Illuminate\Support\Facades\Route;
-
+  
+use App\Http\Controllers\FullCalenderController;
+  
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +14,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+  
+Route::controller(FullCalenderController::class)->group(function(){
+    Route::get('fullcalender', 'index');
+    Route::post('fullcalenderAjax', 'ajax');
+    Route::get('/', function () {
+        return view('welcome');
+    });
 });
+
+
