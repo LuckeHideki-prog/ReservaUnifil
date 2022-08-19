@@ -16,8 +16,11 @@ use App\Http\Controllers\FullCalenderController;
 */
   
 Route::controller(FullCalenderController::class)->group(function(){
-    Route::get('fullcalender', 'index');
-    Route::post('fullcalenderAjax', 'ajax');
+Route::get('fullcalendar', [FullCalendarController::class, 'index']);
+Route::post('create-event', [FullCalendarController::class, 'create']);
+Route::post('event-update', [FullCalendarController::class, 'update']);
+Route::post('event-delete', [FullCalendarController::class, 'delete']);
+    
     Route::get('/', function () {
         return view('welcome');
     });
