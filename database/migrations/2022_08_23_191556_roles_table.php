@@ -13,18 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        if(! Schema::hasTable('clients')) {
-            Schema::create('clients', function (Blueprint $table) {
+        if(! Schema::hasTable('users')) {
+            Schema::create('users', function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('first_name')->nullable();
-                $table->string('last_name')->nullable();
-                $table->string('phone')->nullable();
-                $table->string('email')->nullable();
+                $table->string('name');
+                $table->string('email');
+                $table->string('password');
+                $table->integer('role_id')->unsigned()->nullable();
+                $table->foreign('role_id', '35985_5913e89d4a576')->references('id')->on('roles')->onDelete('cascade');
+                $table->string('remember_token')->nullable();
                 
                 $table->timestamps();
-                $table->softDeletes();
-
-                $table->index(['deleted_at']);
+                
             });
         }
     }
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('users');
     }
 };
