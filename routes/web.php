@@ -14,20 +14,13 @@ use App\Http\Controllers\FullCalenderController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-  
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::controller(FullCalenderController::class)->group(function(){
 Route::get('fullcalendar', [FullCalendarController::class, 'index']);
 Route::post('create-event', [FullCalendarController::class, 'create']);
 Route::post('event-update', [FullCalendarController::class, 'update']);
 Route::post('event-delete', [FullCalendarController::class, 'delete']);
-    
-    Route::get('/', function () {
-        return view('welcome');
-    });
-});
+Route::get('/redirect', 'Auth\LoginController@redirectToProvider');
+Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
+Auth::routes();});
 
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
